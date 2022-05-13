@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "ctsecluster-b07e"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "ctsecluster-b07e"
+  template:
+    metadata:
+      labels:
+        app: "ctsecluster-b07e"
+    spec:
+      containers:
+        - name: "ctsecluster-b07e"
+          image: "it19180526.azurecr.io/ctsecluster"
+          ports:
+          - containerPort: 8080
