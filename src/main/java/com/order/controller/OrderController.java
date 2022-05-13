@@ -30,6 +30,11 @@ public class OrderController {
         orderItemService.updateProductQtyAndSaveOrderItems(orderRequest.getOrderItems());
     }
 
+    @PostMapping("/add-order")
+    public void add(@RequestBody OrderDetail orderDetail) {
+        orderService.add(orderDetail);
+    }
+
     @GetMapping("/get-order")
     @ResponseStatus(HttpStatus.OK)
     public List<OrderDetail> getAll() {
