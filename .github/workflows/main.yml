@@ -9,7 +9,7 @@ env:
   CLUSTER_NAME: CTSE-Cluster
   CLUSTER_RESOURCE_GROUP: CTSE
   NAMESPACE: order-management
-  SECRET: order-management-dockerauth
+  SECRET: ordermanagementdockerauth
   APP_NAME: order-management-api
 
 jobs:
@@ -63,6 +63,16 @@ jobs:
               echo `kubectl create namespace ${{ env.NAMESPACE }}`
           fi
 
+      - name: Create Secret
+        uses: azure/k8s-create-secret@v1
+        with:
+          container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
+          container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          secret-name: ${{ env.SECRET }}
+          namespace: ${{ env.NAMESPACE }}
+          arguments: --force true
+
       # - name: Create Secret
       #   uses: azure/k8s-create-secret@v1
       #   with:
@@ -72,14 +82,14 @@ jobs:
       #     container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
       #     secret-name: ${{ env.SECRET }}
 
-      # - name: Deploy k8s Container
-      #   uses: azure/k8s-deploy@v1.2
-      #   with:
-      #     namespace: ${{ env.NAMESPACE }}
-      #     manifests: |
-      #       k8s/deployment.yaml
-      #       k8s/service.yaml
-      #     images: |
-      #       ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-      #     imagepullsecrets: |
-      #       ${{ env.SECRET }}
+      - name: Deploy k8s Container
+        uses: azure/k8s-deploy@v1.2
+        with:
+          namespace: ${{ env.NAMESPACE }}
+          manifests: |
+            k8s/deployment.yaml
+            k8s/service.yaml
+          images: |
+            ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+          imagepullsecrets: |
+            ${{ env.SECRET }}
