@@ -52,7 +52,7 @@ jobs:
 
       - uses: azure/k8s-set-context@v1
         with:
-          kubeconfig: ${{ secrets.AZURE_CREDENTIALS }}
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
         id: login
 
       - name: Create Namespace
