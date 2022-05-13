@@ -9,7 +9,7 @@ env:
   CLUSTER_NAME: CTSE-Cluster
   CLUSTER_RESOURCE_GROUP: CTSE
   NAMESPACE: order-management
-  SECRET: ctseclusterdockerauth
+  SECRET: order-management-dockerauth
   APP_NAME: order-management-api
 
 jobs:
