@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: order-management-api
-          image: paradocx96/order-management-api:v1
+          image: paradocx96/order-management-api:{{tag}}
           ports:
             - containerPort: 8080
           resources:

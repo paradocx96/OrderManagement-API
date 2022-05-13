@@ -1,4 +1,4 @@
-name: Docker Build - Push DockerHub - Deploy AKS
+name: Docker Build - Push DockerHub
 
 on:
   push:
@@ -25,4 +25,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/order-management-api:v1
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/order-management-api:{{tag}}
+
+      - name: Update Deploy File in K8s
+        run: sed -i.bak 's/{{tag}}/${{ github.sha }}/g' k8s/deployment.yaml  && rm k8s/*.bak
