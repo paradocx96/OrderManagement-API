@@ -45,6 +45,11 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
+      - name: Build and push to Azure Container Registry
+        run: |
+          docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+          docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+
       - uses: azure/k8s-set-context@v1
         with:
           kubeconfig: ${{ secrets.AZURE_CREDENTIALS }}
@@ -58,23 +63,23 @@ jobs:
               echo `kubectl create namespace ${{ env.NAMESPACE }}`
           fi
 
-      - name: Create Secret
-        uses: azure/k8s-create-secret@v1
-        with:
-          namespace: ${{ env.NAMESPACE }}
-          container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
-          container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-          container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-          secret-name: ${{ env.SECRET }}
+      # - name: Create Secret
+      #   uses: azure/k8s-create-secret@v1
+      #   with:
+      #     namespace: ${{ env.NAMESPACE }}
+      #     container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
+      #     container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+      #     container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+      #     secret-name: ${{ env.SECRET }}
 
-      - name: Deploy k8s Container
-        uses: azure/k8s-deploy@v1.2
-        with:
-          namespace: ${{ env.NAMESPACE }}
-          manifests: |
-            k8s/deployment.yaml
-            k8s/service.yaml
-          images: |
-            ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-          imagepullsecrets: |
-            ${{ env.SECRET }}
+      # - name: Deploy k8s Container
+      #   uses: azure/k8s-deploy@v1.2
+      #   with:
+      #     namespace: ${{ env.NAMESPACE }}
+      #     manifests: |
+      #       k8s/deployment.yaml
+      #       k8s/service.yaml
+      #     images: |
+      #       ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+      #     imagepullsecrets: |
+      #       ${{ env.SECRET }}
