@@ -9,7 +9,7 @@ env:
   CLUSTER_NAME: CTSE-Cluster
   CLUSTER_RESOURCE_GROUP: CTSE
   NAMESPACE: order-management
-  SECRET: ordermanagementdockerauth
+  SECRET: order-management-dockerauth
   APP_NAME: order-management-api
 
 jobs:
@@ -66,21 +66,11 @@ jobs:
       - name: Create Secret
         uses: azure/k8s-create-secret@v1
         with:
+          namespace: ${{ env.NAMESPACE }}
           container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
           container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
           container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           secret-name: ${{ env.SECRET }}
-          namespace: ${{ env.NAMESPACE }}
-          arguments: --force true
-
-      # - name: Create Secret
-      #   uses: azure/k8s-create-secret@v1
-      #   with:
-      #     namespace: ${{ env.NAMESPACE }}
-      #     container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
-      #     container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-      #     container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-      #     secret-name: ${{ env.SECRET }}
 
       - name: Deploy k8s Container
         uses: azure/k8s-deploy@v1.2
