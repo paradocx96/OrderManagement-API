@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-management-api-deployment
+  labels:
+    app: order-management-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-management-api
+  template:
+    metadata:
+      labels:
+        app: order-management-api
+    spec:
+      containers:
+        - name: order-management-api
+          image: paradocx96/order-management-api:v1
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 0.2
+              memory: 350Mi
+            limits:
+              cpu: 0.5
+              memory: 500Mi
