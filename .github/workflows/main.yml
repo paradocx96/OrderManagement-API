@@ -47,7 +47,7 @@ jobs:
 
       - uses: azure/k8s-set-context@v1
         with:
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          kubeconfig: ${{ secrets.AKS_CTSECLUSTER_KUBECONFIG }}
         id: login
 
       - name: Create Namespace
