@@ -9,7 +9,7 @@ env:
   CLUSTER_NAME: CTSE-Cluster
   CLUSTER_RESOURCE_GROUP: CTSE
   NAMESPACE: order-management
-  SECRET: order-management-dockerauth
+  SECRET: ctseclusterdockerauth
   APP_NAME: order-management-api
 
 jobs:
@@ -44,11 +44,6 @@ jobs:
           login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-
-#       - name: Build and push to Azure Container Registry
-#         run: |
-#           docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-#           docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
 
       - uses: azure/k8s-set-context@v1
         with:
