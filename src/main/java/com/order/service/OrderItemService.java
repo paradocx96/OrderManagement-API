@@ -56,7 +56,7 @@ public class OrderItemService {
 
     private Product getProductByOrderId(OrderItem orderItem) {
 
-        String baseUrl = "/api/product/seller/get-product/" + orderItem.getProductId();
+        String baseUrl = "http://13.77.46.50:8080/api/product/seller/get-product/" + orderItem.getProductId();
 
         try {
             URL url = new URL(baseUrl);
@@ -76,7 +76,7 @@ public class OrderItemService {
 
     private int saveProductUpdate(JSONObject json) {
 
-        String baseUrl = "/api/product/seller/update-product";
+        String baseUrl = "http://13.77.46.50:8080/api/product/seller/update-product";
 
         try {
             HttpClient client = HttpClient.newHttpClient();
