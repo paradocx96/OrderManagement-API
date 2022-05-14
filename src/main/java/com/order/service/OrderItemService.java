@@ -30,17 +30,18 @@ public class OrderItemService {
     public void updateProductQtyAndSaveOrderItems(OrderItem[] orderItems) {
         for (OrderItem orderItem : orderItems) {
 
-            // Product product = productRepository.findById(orderItem.getProductId()).get();
-            // product.setStockQty(newQuantity);
-            // productRepository.save(product);
-
             Product product = getProductByOrderId(orderItem);
 
             if (product != null) {
-                int newQuantity = product.stockQty - orderItem.getQuantity();
+                int newQuantity = product.getStockQty() - orderItem.getQuantity();
 
                 JSONObject json = new JSONObject();
-                json.put("id", product.id);
+                json.put("id", product.getId());
+                json.put("title", product.getTitle());
+                json.put("sellPrice", product.getSellPrice());
+                json.put("price", product.getPrice());
+                json.put("image", product.getImage());
+                json.put("categoryType", product.getCategoryType());
                 json.put("stockQty", newQuantity);
 
                 int response = saveProductUpdate(json);
@@ -66,7 +67,6 @@ public class OrderItemService {
             ObjectMapper mapper = new ObjectMapper();
             Product product = mapper.readValue(responseStream, Product.class);
 
-            System.out.println(product.stockQty);
             return product;
 
         } catch (IOException e) {
@@ -84,7 +84,7 @@ public class OrderItemService {
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseUrl))
                     .header("content-type", "application/json")
                     .header("Accept", "*/*")
-                    .POST(HttpRequest.BodyPublishers.ofString(String.valueOf(json)))
+                    .PUT(HttpRequest.BodyPublishers.ofString(String.valueOf(json)))
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());

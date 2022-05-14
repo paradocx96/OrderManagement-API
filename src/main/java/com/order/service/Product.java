@@ -7,7 +7,7 @@ public class Product {
     public final String id;
     public final String title;
     public final double sellPrice;
-    public final double price; // number | null;
+    public final double price;
     public final String image;
     public final String categoryType;
     public final int stockQty;
@@ -27,5 +27,33 @@ public class Product {
         this.image = image;
         this.categoryType = categoryType;
         this.stockQty = stockQty;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public double getSellPrice() {
+        return sellPrice;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getCategoryType() {
+        return categoryType;
+    }
+
+    public int getStockQty() {
+        return stockQty;
     }
 }
