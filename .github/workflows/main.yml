@@ -5,11 +5,11 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY_NAME: it19180526
-  CLUSTER_NAME: CTSE-Cluster
-  CLUSTER_RESOURCE_GROUP: CTSE
+  REGISTRY_NAME: it19180526ctse
+  CLUSTER_NAME: CTSE-Assignment-Cluster
+  CLUSTER_RESOURCE_GROUP: CTSE-Assignment
   NAMESPACE: order-management
-  SECRET: ctseclusterdockerauth
+  SECRET: ctseassignmentclusterdockerauth
   APP_NAME: order-management-api
 
 jobs:

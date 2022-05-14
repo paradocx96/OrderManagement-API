@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order-management-api-deployment
+  namespace: order-management
   labels:
     app: order-management-api
 spec:
