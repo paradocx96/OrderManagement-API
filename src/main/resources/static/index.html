@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Management REST API</title>
+    <style type="text/css">
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-0pky {
+            border-color: inherit;
+            text-align: left;
+            vertical-align: top
+        }
+
+        .tg .tg-0lax {
+            text-align: left;
+            vertical-align: top
+        }
+    </style>
+</head>
+
+<body>
+<center>
+    <h1>Order Management REST API</h1>
+
+    <h3>Endpoint URL</h3>
+    <h4>Local: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></h4>
+    <h4>Remote: <a href="https://" target="_blank">https://</a>
+    </h4>
+
+    <table class="tg">
+        <thead>
+        <tr>
+            <th class="tg-0pky">Endpoint</th>
+            <th class="tg-0pky">Method</th>
+            <th class="tg-0pky">Path</th>
+            <th class="tg-0lax">Body</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="tg-0pky">PlaceOrder</td>
+            <td class="tg-0pky">POST</td>
+            <td class="tg-0pky">/api/product/buyer/place-order</td>
+            <td class="tg-0lax">OrderDetails, OrderItem[]</td>
+        </tr>
+        <tr>
+            <td class="tg-0pky">Add Order</td>
+            <td class="tg-0pky">POST</td>
+            <td class="tg-0pky">/api/product/buyer/add-order</td>
+            <td class="tg-0lax">OrderDetails</td>
+        </tr>
+        <tr>
+            <td class="tg-0pky">Get All Orders</td>
+            <td class="tg-0pky">GET</td>
+            <td class="tg-0pky">/api/product/buyer/get-order</td>
+            <td class="tg-0lax">OrderDetails</td>
+        </tr>
+        <tr>
+            <td class="tg-0pky">Get By Id</td>
+            <td class="tg-0pky">GET</td>
+            <td class="tg-0pky">/api/product/buyer/get-order/{id}</td>
+            <td class="tg-0lax">OrderDetails</td>
+        </tr>
+        <tr>
+            <td class="tg-0lax">Delete By Id</td>
+            <td class="tg-0lax">DELETE</td>
+            <td class="tg-0lax">/api/product/buyer/delete-order/{id}</td>
+            <td class="tg-0lax">OrderDetails</td>
+        </tr>
+        </tbody>
+    </table>
+</center>
+<br>
+<br>
+<br>
+<footer>
+    <center>MADE WITH ❤ BY @paradocx96</center>
+</footer>
+</body>
+</html>
