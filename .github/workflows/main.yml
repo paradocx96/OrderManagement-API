@@ -4,14 +4,6 @@ on:
   push:
     branches: [ main ]
 
-#env:
-#  REGISTRY_NAME: it19180526ctse
-#  CLUSTER_NAME: CTSE-Assignment-Cluster
-#  CLUSTER_RESOURCE_GROUP: CTSE-Assignment
-#  NAMESPACE: order-management
-#  SECRET: ctseassignmentclusterdockerauth
-#  APP_NAME: order-management-api
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,44 +36,3 @@ jobs:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
           args: apply -f ./k8s
-
-#      - name: Login to Azure Container Registry
-#        uses: azure/docker-login@v1
-#        with:
-#          login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
-#          username: ${{ secrets.REGISTRY_USERNAME }}
-#          password: ${{ secrets.REGISTRY_PASSWORD }}
-#
-#      - uses: azure/k8s-set-context@v1
-#        with:
-#          kubeconfig: ${{ secrets.KUBE_CONFIG }}
-#        id: login
-#
-#      - name: Create Namespace
-#        run: |
-#          namespacePresent=`kubectl get namespace | grep ${{ env.NAMESPACE }} | wc -l`
-#          if [ $namespacePresent -eq 0 ]
-#          then
-#              echo `kubectl create namespace ${{ env.NAMESPACE }}`
-#          fi
-#
-#      - name: Create Secret
-#        uses: azure/k8s-create-secret@v1
-#        with:
-#          namespace: ${{ env.NAMESPACE }}
-#          container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
-#          container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-#          container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-#          secret-name: ${{ env.SECRET }}
-#
-#      - name: Deploy k8s Container
-#        uses: azure/k8s-deploy@v1.2
-#        with:
-#          namespace: ${{ env.NAMESPACE }}
-#          manifests: |
-#            k8s/deployment.yaml
-#            k8s/service.yaml
-#          images: |
-#            ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-#          imagepullsecrets: |
-#            ${{ env.SECRET }}
