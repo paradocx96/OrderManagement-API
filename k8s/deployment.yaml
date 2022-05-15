@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order-management-api-deployment
-  namespace: order-management
+  namespace: easy-shopping
   labels:
     app: order-management-api
 spec:
